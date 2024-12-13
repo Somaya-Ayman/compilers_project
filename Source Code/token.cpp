@@ -53,6 +53,18 @@ QList<Token> tokenize(const QString &input) {
             continue;
         }
 
+        if (currentChar == '{') {
+            while (i < input.size() && input[i] != '}') {
+                i++;
+            }
+            // Ensure to move past the closing brace if found
+            if (i < input.size() && input[i] == '}') {
+                i++;
+            }
+            continue;
+        }
+
+
         // Handle single tokens
         if (currentChar == ';') tokens.append(Token(";", TokenType::SEMICOLON));
         else if (currentChar == '<') tokens.append(Token("<", TokenType::LESSTHAN));
